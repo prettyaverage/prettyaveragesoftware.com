@@ -1,15 +1,6 @@
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  // Indexing stays off until launch, on any host.
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
-      },
-    ];
-  },
   async redirects() {
     return [
       {
