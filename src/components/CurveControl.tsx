@@ -54,6 +54,14 @@ export default function CurveControl() {
         source.x = bounds.left + bounds.width - (source.x - bounds.left);
         source = { ...source, y: -24, radius: 6 };
       }
+      // The right-hand dot is generated above the header: keep it hidden behind the header bar.
+      const header = document.querySelector(".site-header");
+      const layer = flight.current?.ownerSVGElement;
+      if (layer)
+        layer.style.clipPath =
+          launchRight && header
+            ? `inset(${Math.max(0, header.getBoundingClientRect().bottom)}px 0 0 0)`
+            : "none";
       landing = Math.max(
         0,
         Math.min(800, ((source.x - bounds.left) / bounds.width) * 800),
