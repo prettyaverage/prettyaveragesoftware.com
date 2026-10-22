@@ -11,7 +11,6 @@ export default function CurveControl() {
   const incoming = useRef<SVGGElement>(null);
   const flight = useRef<SVGCircleElement>(null);
   const pulse = useRef<SVGPathElement>(null);
-  const fizzle = useRef<SVGGElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const target = useRef(400);
   const ready = useRef(false);
@@ -50,7 +49,11 @@ export default function CurveControl() {
           radius: (logo.getBoundingClientRect().width / 160) * 11.25,
         };
       }
-      if (launchRight) source.x = bounds.left + bounds.width - (source.x - bounds.left);
+      if (launchRight) {
+        // The right-hand dot is generated off-screen, above the header.
+        source.x = bounds.left + bounds.width - (source.x - bounds.left);
+        source = { ...source, y: -24, radius: 6 };
+      }
       landing = Math.max(
         0,
         Math.min(800, ((source.x - bounds.left) / bounds.width) * 800),
@@ -163,25 +166,14 @@ export default function CurveControl() {
             flashAge = 0;
           }
         }
-        if (fizzle.current) {
-          fizzle.current.setAttribute(
-            "transform",
-            `translate(${x} ${curveY(x)}) scale(${1 + Math.min(flashAge / 0.65, 1) * 1.8})`,
-          );
-          fizzle.current.style.opacity = String(
-            Math.max(0, 1 - flashAge / 0.65) * 0.3,
-          );
-        }
         if (pulse.current) {
           pulse.current.setAttribute(
             "transform",
             `translate(${x - 400} ${curveY(x) - 65})`,
           );
-          pulse.current.setAttribute(
-            "stroke-width",
-            `${12 + Math.min(flashAge / 0.9, 1) * 40}`,
-          );
-          pulse.current.style.opacity = `${Math.max(0, 1 - flashAge / 0.9) * 0.22}`;
+          const swell = 1 - (1 - Math.min(flashAge / 1.1, 1)) ** 3;
+          pulse.current.setAttribute("stroke-width", `${12 + swell * 34}`);
+          pulse.current.style.opacity = `${(1 - swell) * 0.2}`;
         }
       } else if (paused) {
         x = target.current;
@@ -194,7 +186,6 @@ export default function CurveControl() {
         setReady();
         incoming.current?.setAttribute("style", "opacity:0");
         if (pulse.current) pulse.current.style.opacity = "0";
-        if (fizzle.current) fizzle.current.style.opacity = "0";
       }
       if (!visible || document.hidden) hideFlight();
       frame = requestAnimationFrame(draw);
@@ -227,12 +218,6 @@ export default function CurveControl() {
         />
       </svg>
       <svg viewBox="0 0 800 340" preserveAspectRatio="none" aria-hidden="true">
-        <g ref={fizzle} opacity="0" fill="currentColor">
-          <circle cx="-7" cy="-5" r="1" />
-          <circle cx="5" cy="-7" r=".8" />
-          <circle cx="8" cy="4" r="1" />
-          <circle cx="-4" cy="7" r=".7" />
-        </g>
         <path
           ref={pulse}
           d="M400 65h.01"
