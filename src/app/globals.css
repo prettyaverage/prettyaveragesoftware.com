@@ -673,20 +673,11 @@ html[data-logo-pop="right"] .dot-right {
   }
 }
 
-/* A static meadow wash keeps the curve and words in the foreground. */
+/* Tagline block under the curve. */
 .hero-meadow {
   position: relative;
   isolation: isolate;
-  min-height: 210px;
-  padding: 16px 24px 130px;
-}
-.hero-meadow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: url("/brand/meadow-florals.svg") center bottom / max(100%, 900px) 190px no-repeat;
-  pointer-events: none;
+  padding: 16px 24px 72px;
 }
 .hero-tagline {
   max-width: 470px;
@@ -702,12 +693,8 @@ html[data-logo-pop="right"] .dot-right {
 .curve {
   margin-top: 42px;
 }
-html[data-theme="dark"] .hero-meadow::before {
-  opacity: .65;
-}
 @media (max-width: 760px) {
   .hero-meadow {
-    min-height: 220px;
     padding-inline: 30px;
   }
   .curve {
