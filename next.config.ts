@@ -1,17 +1,16 @@
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  // Indexing stays off until launch, on any host.
-  async headers() {
+  async redirects() {
     return [
       {
         source: "/:path*",
-        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+        has: [
+          { type: "host" as const, value: "prettyaveragesoftware-com\\.vercel\\.app" },
+        ],
+        destination: "https://prettyaveragesoftware.com/:path*",
+        permanent: true,
       },
-    ];
-  },
-  async redirects() {
-    return [
       {
         source: "/:path*",
         has: [
