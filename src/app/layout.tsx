@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   description:
     "Just your average software studio.",
   alternates: { canonical: "/" },
-  robots: { index: false, follow: false },
   openGraph: {
     type: "website",
     url: "/",
