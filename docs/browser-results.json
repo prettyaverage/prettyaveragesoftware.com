@@ -1,0 +1,44 @@
+[
+  {
+    "brand": "pas",
+    "width": 1440,
+    "layout": {
+      "overflow": false,
+      "images": true,
+      "h1": 1,
+      "title": "Pretty Average Software",
+      "canonical": "https://prettyaveragesoftware.com/"
+    },
+    "skip": true,
+    "errors": [],
+    "violations": []
+  },
+  {
+    "brand": "pas",
+    "width": 390,
+    "layout": {
+      "overflow": false,
+      "images": true,
+      "h1": 1,
+      "title": "Pretty Average Software",
+      "canonical": "https://prettyaveragesoftware.com/"
+    },
+    "skip": true,
+    "errors": [],
+    "violations": []
+  },
+  {
+    "brand": "pas",
+    "width": 320,
+    "layout": {
+      "overflow": false,
+      "images": true,
+      "h1": 1,
+      "title": "Pretty Average Software",
+      "canonical": "https://prettyaveragesoftware.com/"
+    },
+    "skip": true,
+    "errors": [],
+    "violations": []
+  }
+]
